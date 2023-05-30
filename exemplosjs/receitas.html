@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+    <title>Catálogo de Receitas</title>
+</head>
+<body onload="preencheCatalogo()">
+    <div>
+        <h1>Catalogo de receitas</h1>
+        <div class="container-fluid bg-warning ">
+            <div class="row flex-wrap: wrap d-flex justify-content-evenly" id="pnlCatalogo">
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        const receita= [{
+       "título": "1abc",
+       "imagem": "OIP.png",
+       "preparo": "prepare a receita 1",
+       "ingredientes": ["agua", "leite", "açucar"]
+   },
+   {
+       "título": "2abc",
+       "imagem": "OIP.png",
+       "preparo": "prepare a receita 2",
+       "ingredientes": ["manteiga", "farinha", "açucar", "po de amendoim"]
+   },
+   {
+       "título": "3abc",
+       "imagem": "OIP.png",
+       "preparo": "prepare a receita 3",
+       "ingredientes": ["farinha", "ovo", "açucar", "leite", "oleo"]
+   }
+]
+       function getListaIngredientes(receita) { 
+         iniciarLista= document.createElement("ul")
+         iniciarLista.innerHTML=receita.ingredientes.map(item=> `<li>${item}</li>`).join('')
+         return(iniciarLista)
+         
+       }
+       function getCard(receita) {
+           
+
+           const iniciarCard = document.createElement("DIV");
+           iniciarCard.setAttribute("class","card mx-3  my-2 py-2 ");
+           iniciarCard.style.height="92vh"
+           iniciarCard.style.width = "250px";
+
+           const iniciarBody = document.createElement("DIV");
+           iniciarBody.setAttribute("class","card-body");
+
+           const titulo= document.createElement("H3")
+           titulo.setAttribute("class","card-title");
+           titulo.innerText= receita.título;
+
+           const iniciarImagem=document.createElement("IMG");
+           iniciarImagem.setAttribute("src",receita.imagem);
+           iniciarImagem.setAttribute("class","card-img-top ");
+
+           const iniciarListaTexto=  document.createElement("DIV");
+           iniciarListaTexto.setAttribute("class","card-text");
+           
+           const lista=getListaIngredientes(receita)
+
+           const preparoReceita= document.createElement("P");
+           preparoReceita.innerText=receita.preparo
+           const separador= document.createElement("HR");
+           
+           
+           
+           
+           iniciarCard.appendChild(iniciarBody);
+           iniciarBody.appendChild(iniciarImagem);
+           iniciarBody.appendChild(titulo);
+           iniciarBody.appendChild(iniciarListaTexto);
+           iniciarListaTexto.appendChild(lista)
+           iniciarListaTexto.appendChild(separador)
+           iniciarListaTexto.appendChild(preparoReceita)
+
+           return(iniciarCard)
+
+       }
+       function preencheCatalogo() {
+           catalogo=document.getElementById("pnlCatalogo");
+            receita.map(receita=> catalogo.appendChild(getCard(receita)));
+
+       }
+       
+       
+   </script>
+</body>
+</html>
